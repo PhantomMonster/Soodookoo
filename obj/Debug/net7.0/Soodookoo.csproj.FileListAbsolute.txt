@@ -1,0 +1,14 @@
+D:\My Projects\Soodookoo\bin\Debug\net7.0\Soodookoo.exe
+D:\My Projects\Soodookoo\bin\Debug\net7.0\Soodookoo.deps.json
+D:\My Projects\Soodookoo\bin\Debug\net7.0\Soodookoo.runtimeconfig.json
+D:\My Projects\Soodookoo\bin\Debug\net7.0\Soodookoo.dll
+D:\My Projects\Soodookoo\bin\Debug\net7.0\Soodookoo.pdb
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.AssemblyInfoInputs.cache
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.AssemblyInfo.cs
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.csproj.CoreCompileInputs.cache
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.dll
+D:\My Projects\Soodookoo\obj\Debug\net7.0\refint\Soodookoo.dll
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.pdb
+D:\My Projects\Soodookoo\obj\Debug\net7.0\Soodookoo.genruntimeconfig.cache
+D:\My Projects\Soodookoo\obj\Debug\net7.0\ref\Soodookoo.dll
