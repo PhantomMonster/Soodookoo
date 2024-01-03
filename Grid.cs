@@ -175,6 +175,52 @@ public class Grid
 
     }
 
+    public void CheckforDoubles(int CheckCell)
+    {
+        Cell Cell = Cells[CheckCell];
+
+        int NumberOfPotential = Cell.NumberPotential.Count;
+
+        if (NumberOfPotential != 2) { return; }
+
+        Cell.GridColourSelectedCell();
+
+        foreach (var NGroup in Cell.N)
+        {
+            List<int> NCellNumber = new() { CheckCell };
+
+            foreach (int nCell in NGroup.Value)
+            {
+                Cell NCell = Cells[nCell];
+
+                NCell.GridColourCheckCell();
+
+                if (Cell.NumberPotential.SequenceEqual(NCell.NumberPotential))
+                {
+                    NCellNumber.Add(nCell);
+
+                    Form1.GameGrid.Refresh();
+                }
+
+            }
+
+            if (NCellNumber.Count == NumberOfPotential)
+            {
+
+                foreach (int cell in NCellNumber)
+                {
+                    Cells[cell].NumberPotential = Cell.NumberPotential;
+                }
+
+                foreach (int cell in NGroup.Value.Except(NCellNumber))
+                {
+                    Cells[cell].NumberPotential = Cells[cell].NumberPotential.Except(Cell.NumberPotential).ToList();
+                }
+            }
+
+        }
+    }
+
     public void UpdateCellinGrid(Cell Cell, int number)
     {
         Cell.UpdateNumberIs(number);
@@ -212,9 +258,28 @@ public class Grid
         }
     }
 
-    public List<int> PrioritiseCells()
+    public List<int> PrioritiseCells(List<int>? startingCells = null)
     {
-        return Cells.Where(x => x.Value.NumberIs is null).OrderBy(x => x.Value.NumberPotential.Count).Select(x => x.Key).ToList();
+        List<int> PrioritisedCells = Cells.Where(x => x.Value.NumberIs is null).OrderBy(x => x.Value.NumberPotential.Count).Select(x => x.Key).ToList();
+
+        if (startingCells is not null)
+        {
+            return PrioritisedCells.Intersect(startingCells).ToList();
+        }
+        
+        return PrioritisedCells;
+    }
+
+    public List<int> PrioritiseDoubleCells(List<int>? startingCells = null)
+    {
+        List<int> PrioritisedCells = Cells.Where(x => x.Value.NumberIs is null).Where(x => x.Value.NumberPotential.Count == 2).Select(x => x.Key).ToList();
+
+        if (startingCells is not null)
+        {
+            return PrioritisedCells.Intersect(startingCells).ToList();
+        }
+
+        return PrioritisedCells;
     }
 
 
@@ -233,7 +298,6 @@ public class Grid
 
             Console.WriteLine(CellList.Aggregate((a, b) => a + "|" + b));
         }
-
 
     }
 
@@ -259,7 +323,36 @@ public class Grid
         }
         DataGridView.ClearSelection();
 
+        DataGridView.DefaultCellStyle.Font = new Font("Tahoma", 16);
+
     }
 
+
+    public void DisplayPotential(DataGridView DataGridView)
+    {
+        DataGridView.Rows.Clear();
+
+        for (int i = 0; i < 9; i++)
+        {
+
+            List<int> GridRow = GetRow(i);
+
+            string[] CellList = new string[9];
+
+            foreach (int cell in GridRow)
+            {
+                //CellList[cell % 9] = Cells[cell].NumberPotential.ToString() ?? "";
+                CellList[cell % 9] = String.Join(" ", Cells[cell].NumberPotential);
+            }
+
+            DataGridView.Rows.Add(CellList);
+            //DataGridView.Columns[i].DisplayIndex = i;
+
+        }
+        DataGridView.ClearSelection();
+
+        DataGridView.DefaultCellStyle.Font = new Font("Tahoma", 8);
+        DataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+    }
 
 }

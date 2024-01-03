@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "N9iauM2hwB8qeCenTXW2tProBSLRUKfdQjdaAtahH9JwlOQE5ckQkr1KiN61BlIm/4dIOHQHb7y6f+dC6o0rDg==",
+  "dgSpecHash": "hoJlHm4P7h7RYVEvhMaX+5PDJXBmQ8XscHTIJFFcvFjMDeRaxDo/O/SQG/BeViwFHTwyodix62wB7tuRMMAuVg==",
   "success": true,
-  "projectFilePath": "D:\\My Projects\\Soodookoo\\Soodookoo.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\My Projects\\Soodookoo\\Soodookoo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\eviec\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\eviec\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\eviec\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\eviec\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

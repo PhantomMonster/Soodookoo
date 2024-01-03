@@ -13,6 +13,9 @@ namespace FormWithButton
         private DataGridView songsDataGridView = new DataGridView();
         public static DataGridView GameGrid = new DataGridView();
         private Button StepButton = new Button();
+        private Button StepCupletsButton = new();
+        private Button ChangeViewButton = new Button();
+        private string CurrentView = "default";
         public static List<int> ProcessList = new();
 
         public Form1()
@@ -27,34 +30,36 @@ namespace FormWithButton
             PopulateGameGrid();
         }
 
-        private void songsDataGridView_CellFormatting(object sender,
-            System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
-        {
-            if (e != null)
-            {
-                if (this.songsDataGridView.Columns[e.ColumnIndex].Name == "Release Date")
-                {
-                    if (e.Value != null)
-                    {
-                        try
-                        {
-                            e.Value = DateTime.Parse(e.Value.ToString() ?? "")
-                                .ToLongDateString();
-                            e.FormattingApplied = true;
-                        }
-                        catch (FormatException)
-                        {
-                            Console.WriteLine("{0} is not a valid date.", e.Value.ToString());
-                        }
-                    }
-                }
-            }
-        }
+        // private void songsDataGridView_CellFormatting(object sender,
+        //     System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
+        // {
+        //     if (e != null)
+        //     {
+        //         if (this.songsDataGridView.Columns[e.ColumnIndex].Name == "Release Date")
+        //         {
+        //             if (e.Value != null)
+        //             {
+        //                 try
+        //                 {
+        //                     e.Value = DateTime.Parse(e.Value.ToString() ?? "")
+        //                         .ToLongDateString();
+        //                     e.FormattingApplied = true;
+        //                 }
+        //                 catch (FormatException)
+        //                 {
+        //                     Console.WriteLine("{0} is not a valid date.", e.Value.ToString());
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
 
         private void StepButton_Click(object sender, EventArgs e)
         {
             bool ExThrown = true;
+
+            if (ProcessList.Count == 0) {ProcessList = Grid.PrioritiseCells();}
 
             do
             {
@@ -84,7 +89,7 @@ namespace FormWithButton
 
                     Grid.Display(GameGrid);
 
-
+                    ProcessList = Grid.PrioritiseCells(ProcessList);
 
                     //GameGrid.Rows[Cell.CellRow].Cells[Cell.CellColumn].Style.BackColor = Color.Red;
 
@@ -95,31 +100,109 @@ namespace FormWithButton
                 {
                     Console.WriteLine("Error with Step: {0}", ex);
 
-                    ProcessList = Grid.PrioritiseCells();
+                    ExThrown = false;
+
+                    //ProcessList = Grid.PrioritiseDoubleCells();
+                }
+           } while (ExThrown);
+
+
+
+           
+
+
+        }
+
+        private void StepCupletsButton_Click(object sender, EventArgs e)
+        {
+            if (ProcessList.Count == 0) {ProcessList = Grid.PrioritiseDoubleCells();}
+
+            bool ExThrown = true;
+
+            //do
+            //{
+                try
+                {
+                    
+                    int CelltoProcess = ProcessList[0];
+
+                    Grid.CheckforDoubles(CelltoProcess);
+
+                    ProcessList.RemoveAt(0);
+
+                    Grid.Display(GameGrid);
+
+                    ProcessList = Grid.PrioritiseDoubleCells(ProcessList);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error with Step: {0}", ex);
+
+                    
 
                     ExThrown = false;
 
 
+                    //ProcessList = Grid.PrioritiseCells();
                 }
-            } while (ExThrown);
+           // } while (ExThrown);
+
+
+        }
+
+        private void ChangeViewButton_Click(object sender, EventArgs e)
+        {
+            switch (CurrentView)
+            {
+                case "potential":
+                    Grid.Display(GameGrid);
+                    CurrentView = "default";
+                    break;
+
+                case "default":
+                    Grid.DisplayPotential(GameGrid);
+                    CurrentView = "potential";
+                    break;
+
+
+                default:
+                    Grid.Display(GameGrid);
+                    CurrentView = "default";
+                    break;
+            }
 
 
 
+            GameGrid.Refresh();
 
         }
 
         private void SetupLayout()
         {
-            this.Size = new Size(9 * 25 + 20, 9 * 25 + 75);
+            this.Size = new Size(9 * 50 + 20, 9 * 50 + 75);
             songsDataGridView.AllowUserToResizeColumns = false;
             songsDataGridView.AllowUserToResizeColumns = false;
 
             StepButton.Text = "Step";
-            StepButton.Location = new Point(8, 8);
+            StepButton.Location = new Point(8, 4);
             StepButton.Click += new EventHandler(StepButton_Click);
 
 
+            StepCupletsButton.Text = "Step Cuplets";
+            StepCupletsButton.Location = new Point(100, 4);
+            StepCupletsButton.Click += new EventHandler(StepCupletsButton_Click);
+            StepCupletsButton.Width = 100;
+
+            ChangeViewButton.Text = "Change View";
+            ChangeViewButton.Location = new Point(200, 4);
+            ChangeViewButton.Width = 100;
+            ChangeViewButton.Click += new EventHandler(ChangeViewButton_Click);
+
+
             buttonPanel.Controls.Add(StepButton);
+            buttonPanel.Controls.Add(ChangeViewButton);
+            buttonPanel.Controls.Add(StepCupletsButton);
 
             buttonPanel.Height = 30;
             buttonPanel.Dock = DockStyle.Bottom;
@@ -137,10 +220,13 @@ namespace FormWithButton
             GameGrid.Location = new Point(8, 8);
             GameGrid.Size = new Size(50, 50);
 
+            GameGrid.RowTemplate.Height = 50;
+
             for (int i = 0; i < 9; i++)
             {
                 GameGrid.Columns[i].Name = $"{i}";
-                GameGrid.Columns[i].Width = 25;
+                GameGrid.Columns[i].Width = 50;
+
             }
 
             GameGrid.ColumnHeadersVisible = false;
@@ -159,7 +245,7 @@ namespace FormWithButton
 
 
         }
-        
+
         private void PopulateGameGrid()
         {
             //PopulateTestGrid("900000037004700000000038905420000800170903456690841023009074060300000500806302000");

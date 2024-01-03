@@ -42,6 +42,12 @@ public class Cell
 
     }
 
+    public string GetPotentialNumbers()
+    {
+        return NumberPotential.ToString();
+
+    }
+
     public void GridColourSelectedCell()
     {
         Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightBlue;
@@ -87,12 +93,6 @@ public class Cell
 
         }
 
-
-
-
     }
-
-
-
 
 }
