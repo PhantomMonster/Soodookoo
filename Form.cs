@@ -8,7 +8,7 @@ namespace FormWithButton
 {
     public class Form1 : Form
     {
-        public static Grid? Grid;
+        private static Grid Grid;
         private Panel buttonPanel = new Panel();
         private DataGridView songsDataGridView = new DataGridView();
         public static DataGridView GameGrid = new DataGridView();
@@ -20,7 +20,7 @@ namespace FormWithButton
 
         public Form1()
         {
-            this.Load += new EventHandler(Form1_Load);
+            this.Load += new EventHandler(Form1_Load!);
         }
 
         private void Form1_Load(System.Object sender, System.EventArgs e)
@@ -119,8 +119,8 @@ namespace FormWithButton
 
             bool ExThrown = true;
 
-            //do
-            //{
+            do
+            {
                 try
                 {
                     
@@ -146,7 +146,7 @@ namespace FormWithButton
 
                     //ProcessList = Grid.PrioritiseCells();
                 }
-           // } while (ExThrown);
+            } while (ExThrown);
 
 
         }
@@ -186,18 +186,18 @@ namespace FormWithButton
 
             StepButton.Text = "Step";
             StepButton.Location = new Point(8, 4);
-            StepButton.Click += new EventHandler(StepButton_Click);
+            StepButton.Click += new EventHandler(StepButton_Click!);
 
 
             StepCupletsButton.Text = "Step Cuplets";
             StepCupletsButton.Location = new Point(100, 4);
-            StepCupletsButton.Click += new EventHandler(StepCupletsButton_Click);
+            StepCupletsButton.Click += new EventHandler(StepCupletsButton_Click!);
             StepCupletsButton.Width = 100;
 
             ChangeViewButton.Text = "Change View";
             ChangeViewButton.Location = new Point(200, 4);
             ChangeViewButton.Width = 100;
-            ChangeViewButton.Click += new EventHandler(ChangeViewButton_Click);
+            ChangeViewButton.Click += new EventHandler(ChangeViewButton_Click!);
 
 
             buttonPanel.Controls.Add(StepButton);

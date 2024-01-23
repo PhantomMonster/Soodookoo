@@ -91,11 +91,11 @@ public class Grid
             {
                 Cells[NCell].GridColourCheckCell();
 
-                int? NCellNumber = Cells[NCell].NumberIs;
+                int NCellNumber = Cells[NCell].NumberIs ?? 0;
 
-                if (NCellNumber is not null)
+                if (Cell.NumberPotential.Contains(NCellNumber))
                 {
-                    Cell.UpdateNumberIsNot((int)NCellNumber);
+                    Cell.UpdateNumberIsNot(NCellNumber);
                 }
             }
         }

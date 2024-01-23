@@ -44,7 +44,7 @@ public class Cell
 
     public string GetPotentialNumbers()
     {
-        return NumberPotential.ToString();
+        return NumberPotential.ToString() ?? "";
 
     }
 
