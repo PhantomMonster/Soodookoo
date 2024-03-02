@@ -50,28 +50,28 @@ public class Cell
 
     public void GridColourSelectedCell()
     {
-        Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightBlue;
+        //Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightBlue;
 
         Form1.GameGrid.Refresh();
     }
 
     public void GridColourSelectedGroup()
     {
-        Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightSalmon;
+        //Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightSalmon;
 
         Form1.GameGrid.Refresh();
     }
 
     public void GridColourCheckCell()
     {
-        Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightPink;
+        //Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightPink;
 
         //Form1.GameGrid.Refresh();
     }
 
     public void GridColourChangedCell()
     {
-        Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightGreen;
+        //Form1.GameGrid.Rows[CellRow].Cells[CellColumn].Style.BackColor = Color.LightGreen;
 
         Form1.GameGrid.Refresh();
     }
